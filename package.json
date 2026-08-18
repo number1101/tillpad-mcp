@@ -1,0 +1,34 @@
+{
+  "name": "tillpad-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Catalog and schema stub for the hosted Tillpad remote MCP server",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "tillpad",
+    "rag",
+    "kvp",
+    "remote-mcp"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/number1101/tillpad-mcp.git"
+  },
+  "homepage": "https://tillpad.cnrcode.com",
+  "bugs": {
+    "url": "https://github.com/number1101/tillpad-mcp/issues"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

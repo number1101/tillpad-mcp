@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.number1101/tillpad-mcp",
+  "title": "Tillpad",
+  "description": "Bounded KVP, RAG search, and wipe receipts for agent jobs over remote MCP",
+  "version": "0.1.0",
+  "websiteUrl": "https://tillpad.cnrcode.com",
+  "repository": {
+    "url": "https://github.com/number1101/tillpad-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://tillpad.cnrcode.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Tillpad API key as Bearer tp_… (mint in the dashboard)",
+          "isRequired": true,
+          "isSecret": true,
+          "placeholder": "Bearer tp_…"
+        }
+      ]
+    }
+  ]
+}
