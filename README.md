@@ -16,7 +16,7 @@ Tillpad gives agents namespaced key-value storage, file upload + semantic search
 ## Get an API key
 
 1. Open [tillpad.cnrcode.com](https://tillpad.cnrcode.com) and create an account.
-2. In the dashboard, mint an API key. Secrets start with `tp_`.
+2. Subscribe to Tillpad Pro on [Pricing](https://tillpad.cnrcode.com/pricing), then mint an API key in the dashboard. Secrets start with `tp_`.
 3. Use an **account** key for ongoing access, or a **run** key when the job should expire and wipe.
 
 Never commit a real key. Use the `tp_…` placeholder in configs.
