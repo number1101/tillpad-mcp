@@ -123,17 +123,14 @@ The Tillpad product (Worker, billing, storage) is closed source. This catalog is
 
 ## Directory listing
 
-Keep this GitHub repo **private** until the README looks right. Then:
-
-1. GitHub → Settings → Danger Zone → **Change repository visibility** → Public.
-2. Push a version tag so [GitHub Actions](.github/workflows/publish-mcp.yml) publishes `server.json` to the [official MCP Registry](https://registry.modelcontextprotocol.io) (`io.github.number1101/tillpad-mcp`):
+1. Push a version tag so [GitHub Actions](.github/workflows/publish-mcp.yml) publishes `server.json` to the [official MCP Registry](https://registry.modelcontextprotocol.io) (`io.github.number1101/tillpad-mcp`):
 
    ```bash
    git tag v0.1.0
    git push origin v0.1.0
    ```
 
-3. Submit [https://github.com/number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
+2. Submit [https://github.com/number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
 
 ## License
 
