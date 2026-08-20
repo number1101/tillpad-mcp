@@ -147,3 +147,13 @@ server.tool(
   {},
   async () => stub(),
 );
+
+server.tool(
+  "support_contact",
+  "Contact Tillpad support from a Pro account. Delivers your subject and message to the Tillpad team; replies go to the account email. Requires an active Pro subscription.",
+  {
+    subject: z.string(),
+    message: z.string(),
+  },
+  async () => stub(),
+);

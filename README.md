@@ -92,6 +92,7 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 | `rag_search` | Semantic search over indexed documents |
 | `inspect_storage` | Namespace inventory (scoped to the key when applicable) |
 | `run_finish` | Wipe namespaces bound to this **run** key; returns a signed wipe receipt |
+| `support_contact` | Contact Tillpad support from a **Pro** account; replies go to the account email |
 
 ## Typical agent loop
 
