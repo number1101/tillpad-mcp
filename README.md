@@ -125,14 +125,18 @@ The Tillpad product (Worker, billing, storage) is closed source. This catalog is
 
 ## Directory listing
 
-1. Push a version tag so [GitHub Actions](.github/workflows/publish-mcp.yml) publishes `server.json` to the [official MCP Registry](https://registry.modelcontextprotocol.io) (`io.github.number1101/tillpad-mcp`):
+Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](https://cnrcode.com/.well-known/mcp-registry-auth)).
+
+1. Ensure `https://cnrcode.com/.well-known/mcp-registry-auth` is deployed (`cnrcode-site` repo).
+2. Set GitHub repo secret **`MCP_PRIVATE_KEY`** (hex; see `cnrcode-site` key generation script).
+3. Push a version tag so [GitHub Actions](.github/workflows/publish-mcp.yml) publishes `server.json` to the [official MCP Registry](https://registry.modelcontextprotocol.io):
 
    ```bash
-   git tag v0.1.0
-   git push origin v0.1.0
+   git tag v0.1.1
+   git push origin v0.1.1
    ```
 
-2. Submit [https://github.com/number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
+4. Optionally submit [https://github.com/number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
 
 ## License
 

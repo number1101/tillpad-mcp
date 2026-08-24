@@ -8,7 +8,11 @@ The hosted product is not developed here. Pull requests that add production Work
 
 - Doc fixes (install snippets, tool descriptions, links)
 - Schema drift: tool **names**, descriptions, and input shapes must match the hosted server at `https://tillpad.cnrcode.com/mcp`
-- Registry metadata in `server.json` (keep `remotes[0].url` on the production endpoint)
+- Registry metadata in `server.json` (keep `remotes[0].url` on the production endpoint; registry name is `com.cnrcode/tillpad`)
+
+## MCP Registry publish
+
+Publishing uses **HTTP domain auth** for `cnrcode.com`. The proof file is maintained in the `cnrcode-site` repo. CI needs the `MCP_PRIVATE_KEY` repository secret (Ed25519 private key hex, never commit it).
 
 ## Schema stub
 

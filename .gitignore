@@ -8,3 +8,5 @@ dist/
 .cursor/
 .mcpregistry_github_token
 .mcpregistry_registry_token
+.mcp-registry-private-key
+mcp-publisher.exe
