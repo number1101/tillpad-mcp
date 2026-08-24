@@ -13,6 +13,8 @@ Tillpad gives agents namespaced key-value storage, file upload + semantic search
 
 > This repository is the **public catalog and schema stub** for directory crawlers. It is not the hosted server. Point MCP clients at the live URL above with a Tillpad API key. Running the TypeScript in this repo does not store or search anything.
 
+**Agent guide:** see [AGENTS.md](./AGENTS.md) for discovery URLs, auth, and MCP connect snippets.
+
 ## Get an API key
 
 1. Open [tillpad.cnrcode.com](https://tillpad.cnrcode.com) and create an account.
