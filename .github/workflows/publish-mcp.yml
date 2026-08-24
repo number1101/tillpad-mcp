@@ -9,6 +9,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
     steps:
       - name: Checkout
@@ -18,8 +19,17 @@ jobs:
         run: |
           curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
 
-      - name: Authenticate to MCP Registry
-        run: ./mcp-publisher login http --domain cnrcode.com --private-key "${{ secrets.MCP_PRIVATE_KEY }}"
+      - name: Retire GitHub-namespace listing (frees remote URL)
+        run: |
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher status --status deleted --all-versions --yes --message "Moved to com.cnrcode/tillpad" io.github.number1101/tillpad-mcp || true
+
+      - name: Authenticate to MCP Registry (cnrcode.com)
+        env:
+          MCP_PRIVATE_KEY: ${{ secrets.MCP_PRIVATE_KEY }}
+        run: |
+          KEY="$(printf '%s' "$MCP_PRIVATE_KEY" | tr -d '[:space:]')"
+          ./mcp-publisher login http --domain cnrcode.com --private-key "$KEY"
 
       - name: Publish server.json
         run: ./mcp-publisher publish
