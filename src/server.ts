@@ -55,8 +55,42 @@ server.tool(
 
 server.tool(
   "billing_machine_pay",
-  "Describe how to unlock Pro via Stripe MPP (Shared Payment Token). Returns the POST URL and amount; the agent must call that HTTP endpoint with an MPP Payment credential (not a one-shot MCP settle). Humans should use Checkout instead for auto-renewing Stripe subscriptions.",
-  {},
+  "Describe how to unlock Pro or purchase agent SKUs via Stripe MPP. Optional sku (default pro_prepaid_30d). Returns POST URL and amount; agent must call HTTP with MPP Payment credential.",
+  {
+    sku: z
+      .enum([
+        "pro_prepaid_30d",
+        "pro_prepaid_90d",
+        "topup_kvp_10k",
+        "topup_storage_1gb",
+      ])
+      .optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "agent_bootstrap",
+  "Start zero-human onboarding: create bootstrap token from email (no outbound mail). Next POST /api/billing/machine-pay with Bearer bootstrapToken.",
+  {
+    email: z.string(),
+    label: z.string().optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "keys_create",
+  "Mint a run or sub API key from an account key (REST POST /api/keys). Requires account tp_ key.",
+  {
+    name: z.string().optional(),
+    kind: z.enum(["run", "sub"]),
+    ttlSeconds: z.number().optional(),
+    namespaces: z.array(z.string()).optional(),
+    tools: z.array(z.string()).optional(),
+    opBudget: z.number().optional(),
+    wipeOnExpire: z.boolean().optional(),
+  },
   async () => stub(),
 );
 

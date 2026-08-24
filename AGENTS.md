@@ -13,8 +13,28 @@ This repository (`tillpad-mcp`) is the **public MCP catalog stub** for directory
 ## Start here
 
 1. Read the curated site index: https://tillpad.cnrcode.com/llms.txt
-2. Run the scratchpad loop: https://tillpad.cnrcode.com/scratchpad.txt (~5 min)
-3. Full agent guide: https://tillpad.cnrcode.com/llms-full.txt
+2. **Zero-human path:** bootstrap → machine-pay → account key (see scratchpad.txt § Zero-human)
+3. Run the scratchpad loop: https://tillpad.cnrcode.com/scratchpad.txt (~5 min)
+4. Full agent guide: https://tillpad.cnrcode.com/llms-full.txt
+
+## Zero-human bootstrap
+
+```bash
+curl -s -X POST https://tillpad.cnrcode.com/api/agents/bootstrap \
+  -H "Content-Type: application/json" \
+  -d '{"email":"agent@example.com"}'
+# → bootstrapToken
+
+curl -s -X POST https://tillpad.cnrcode.com/api/billing/machine-pay \
+  -H "Authorization: Bearer <bootstrapToken>" \
+  -H "Content-Type: application/json" \
+  -d '{"sku":"pro_prepaid_30d"}'
+# MPP settle → secret tp_… + planPeriodEnd
+```
+
+Or use MCP tools `agent_bootstrap` and `billing_machine_pay`. Top-up SKUs (`topup_kvp_10k`, `topup_storage_1gb`) require active Pro — see `GET /api/config` → `plans.agentSkus`.
+
+Legal: https://tillpad.cnrcode.com/terms · https://tillpad.cnrcode.com/privacy · https://tillpad.cnrcode.com/refunds
 
 ## Connect MCP
 
@@ -33,7 +53,7 @@ Point any MCP client at the live endpoint with a Tillpad API key (`tp_…`):
 }
 ```
 
-Mint keys at https://tillpad.cnrcode.com after subscribing to Pro.
+Mint keys via bootstrap + machine-pay, or at https://tillpad.cnrcode.com after human Pro checkout.
 
 ## Machine-readable discovery
 
@@ -51,14 +71,14 @@ Mint keys at https://tillpad.cnrcode.com after subscribing to Pro.
 
 ## Authentication
 
-- **Agents:** `Authorization: Bearer tp_…` (account, run, or scoped sub key)
+- **Agents:** `Authorization: Bearer tp_…` (account, run, or scoped sub key); bootstrap JWT on machine-pay only
 - **Humans:** email OTP → session JWT (Turnstile on OTP only; API/MCP paths are CAPTCHA-free)
 
-Active Pro subscription is required to create keys and run metered work.
+Active Pro required to create keys and run metered work.
 
 ## Tool schemas
 
-Input schemas for all 15 MCP tools are in:
+Input schemas for all **17** MCP tools are in:
 
 - https://tillpad.cnrcode.com/.well-known/mcp.json (under `mcpServers.tillpad.tools`)
 - [`src/server.ts`](src/server.ts) in this repo (Zod stubs matching production)

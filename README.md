@@ -17,6 +17,16 @@ Tillpad gives agents namespaced key-value storage, file upload + semantic search
 
 ## Get an API key
 
+### Zero-human (agents)
+
+1. `POST https://tillpad.cnrcode.com/api/agents/bootstrap` with `{ "email": "agent@example.com" }` → `bootstrapToken` (no outbound mail).
+2. `POST https://tillpad.cnrcode.com/api/billing/machine-pay` with `Authorization: Bearer <bootstrapToken>` and optional `{ "sku": "pro_prepaid_30d" }`.
+3. Settle Stripe MPP ($9.00 / 30 days) → response includes `secret` (`tp_…`) and `planPeriodEnd`.
+
+See [scratchpad.txt](https://tillpad.cnrcode.com/scratchpad.txt) and [llms-full.txt](https://tillpad.cnrcode.com/llms-full.txt). Legal: [Terms](https://tillpad.cnrcode.com/terms).
+
+### Human path
+
 1. Open [tillpad.cnrcode.com](https://tillpad.cnrcode.com) and create an account.
 2. Subscribe to Tillpad Pro on [Pricing](https://tillpad.cnrcode.com/pricing), then mint an API key in the dashboard. Secrets start with `tp_`.
 3. Use an **account** key for ongoing access, or a **run** key when the job should expire and wipe.
@@ -83,7 +93,9 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 | `usage_get` | Current period usage and quotas |
 | `budget_get` | Remaining quotas, soft thresholds, and a checkout URL |
 | `budget_estimate` | Preflight 402/429 before spending (`textLength` / `byteLength` for `rag_index`) |
-| `billing_machine_pay` | How agents unlock prepaid Pro via Stripe Machine Payments (MPP) |
+| `billing_machine_pay` | How agents unlock prepaid Pro or buy SKUs via Stripe MPP (`sku` optional) |
+| `agent_bootstrap` | Zero-human onboarding: bootstrap token from email (no outbound mail) |
+| `keys_create` | Mint a run/sub key from an account `tp_` key |
 | `kvp_put` | Store a string under a namespace/key (response includes `budget`) |
 | `kvp_get` | Read a namespaced value |
 | `kvp_delete` | Delete a KVP key |
@@ -110,7 +122,7 @@ Use `budget_estimate` before large index jobs. `budget_get` / `usage_get` show w
 - **401** — missing or invalid `Authorization: Bearer tp_…`
 - **402 / 429** — plan or quota. JSON includes `code`, `status`, `actions`, and `budget`
   - `actions[].type: "checkout"` — hosted Stripe Checkout URL for a **recurring** human subscription
-  - `actions[].type: "machine_pay"` — agent prepaid Pro (30 days, not auto-renew) via Stripe MPP
+  - `actions[].type: "machine_pay"` — agent prepaid Pro (30/90 days) or top-up SKUs via Stripe MPP; default sku `pro_prepaid_30d` at $9.00
 
 This is Stripe Machine Payments Protocol, not ChatGPT Instant Checkout / ACP.
 
