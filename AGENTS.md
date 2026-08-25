@@ -67,6 +67,7 @@ Mint keys via bootstrap + machine-pay, or at https://tillpad.cnrcode.com after h
 | MCP discovery | https://tillpad.cnrcode.com/.well-known/mcp.json |
 | MCP server descriptor | https://tillpad.cnrcode.com/.well-known/mcp/server.json |
 | Agent capability card | https://tillpad.cnrcode.com/.well-known/agent-card.json |
+| Glama connector claim | https://tillpad.cnrcode.com/.well-known/glama.json |
 | Sitemap | https://tillpad.cnrcode.com/sitemap.xml |
 
 ## Authentication
