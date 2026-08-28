@@ -22,6 +22,8 @@
     "url": "https://github.com/number1101/tillpad-mcp/issues"
   },
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

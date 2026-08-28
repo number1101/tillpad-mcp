@@ -150,6 +150,38 @@ Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](htt
 
 4. Optionally submit [https://github.com/number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
 
+### Glama
+
+This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the 17 tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
+
+Listing: [glama.ai/mcp/servers/number1101/tillpad-mcp](https://glama.ai/mcp/servers/number1101/tillpad-mcp)
+
+After claiming via [`glama.json`](glama.json), configure the Dockerfile admin page:
+
+| Field | Value |
+|-------|-------|
+| Build steps | `["npm ci", "npm run build"]` |
+| CMD arguments | `["node", "dist/main.js"]` |
+| Env schema | default (empty — no credentials needed) |
+| Placeholder params | `{}` |
+
+Glama generates its own Dockerfile from that form; the repo [`Dockerfile`](Dockerfile) is for local smoke tests only.
+
+Score badge (for awesome-mcp-servers and similar lists):
+
+```markdown
+[![number1101/tillpad-mcp MCP server](https://glama.ai/mcp/servers/number1101/tillpad-mcp/badges/score.svg)](https://glama.ai/mcp/servers/number1101/tillpad-mcp)
+```
+
+Local verify:
+
+```bash
+npm ci && npm run build && npm start   # hangs on stdio — expected
+docker build -t tillpad-mcp-stub . && docker run -i tillpad-mcp-stub
+```
+
+Full step-by-step (claim, admin Dockerfile, release, awesome-mcp PR): [docs/glama-release.md](docs/glama-release.md).
+
 ## License
 
 [MIT](./LICENSE) — catalog, documentation, and schema stub only.

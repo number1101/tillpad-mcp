@@ -18,6 +18,8 @@ Publishing uses **HTTP domain auth** for `cnrcode.com`. The proof file is mainta
 
 [`src/server.ts`](src/server.ts) exists so crawlers can detect `server.tool(...)` registrations. Handlers only point at the hosted URL. Do not implement KVP, RAG, or billing here.
 
+[`src/main.ts`](src/main.ts) wires the stub to stdio transport for Glama and directory introspection only. It is not a second live MCP endpoint.
+
 ## License
 
 Contributions are accepted under the [MIT License](./LICENSE).
