@@ -45,7 +45,7 @@ server.tool(
   "budget_estimate",
   "Estimate whether an operation would hit 402/429 before spending. For rag_index you can pass textLength/byteLength instead of amount.",
   {
-    kind: z.enum(["kvp_ops", "storage_bytes", "rag_index", "rag_query"]),
+    kind: z.enum(["kvp_ops", "storage_bytes", "rag_index", "rag_query", "inbound_email"]),
     amount: z.number().optional(),
     textLength: z.number().optional(),
     byteLength: z.number().optional(),
@@ -65,6 +65,24 @@ server.tool(
         "topup_storage_1gb",
       ])
       .optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "billing_portal",
+  "Get Stripe Customer Portal URL for subscription management and invoice history (human billing).",
+  {},
+  async () => stub(),
+);
+
+server.tool(
+  "billing_purchases_list",
+  "List local payment history (MPP purchases and logged Stripe events). Optional includeStripe merges unlogged Stripe charges/invoices.",
+  {
+    limit: z.number().optional(),
+    cursor: z.string().optional(),
+    includeStripe: z.boolean().optional(),
   },
   async () => stub(),
 );
@@ -189,5 +207,105 @@ server.tool(
     subject: z.string(),
     message: z.string(),
   },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_create",
+  "Create a receive-only email inbox (temporary or permanent) on the configured inbound domain.",
+  {
+    localPart: z.string(),
+    kind: z.enum(["temporary", "permanent"]),
+    ttlSeconds: z.number().optional(),
+    domain: z.string().optional(),
+  },
+  async () => stub(),
+);
+
+server.tool("inbox_list", "List active receive-only inboxes for the account.", {}, async () => stub());
+
+server.tool("inbox_get", "Get one inbox by id.", { inboxId: z.string() }, async () => stub());
+
+server.tool("inbox_delete", "Delete an inbox and purge stored messages.", { inboxId: z.string() }, async () => stub());
+
+server.tool(
+  "inbox_messages_list",
+  "List message metadata for an inbox.",
+  {
+    inboxId: z.string(),
+    limit: z.number().optional(),
+    offset: z.number().optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_message_get",
+  "Get message metadata and attachment list.",
+  { inboxId: z.string(), messageId: z.string() },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_message_raw",
+  "Download raw MIME for a message (meters 1 kvp_op).",
+  { inboxId: z.string(), messageId: z.string() },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_attachment_get",
+  "Download an attachment (meters 1 kvp_op). Returns base64 body.",
+  {
+    inboxId: z.string(),
+    messageId: z.string(),
+    attachmentId: z.string(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_webhook_create",
+  "Register HTTPS webhook for email.received notifications (metadata only).",
+  { url: z.string(), secret: z.string().optional() },
+  async () => stub(),
+);
+
+server.tool("inbox_webhook_list", "List registered email webhooks.", {}, async () => stub());
+
+server.tool("inbox_webhook_delete", "Disable an email webhook.", { webhookId: z.string() }, async () => stub());
+
+server.tool(
+  "inbox_webhook_deliveries_list",
+  "List recent webhook delivery attempts. Use status=failed for delivery failures after all retries.",
+  {
+    status: z.enum(["pending", "retrying", "failed", "delivered", "skipped"]).optional(),
+    webhookId: z.string().optional(),
+    limit: z.number().optional(),
+    offset: z.number().optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_audit_list",
+  "List inbox audit log entries for the account.",
+  { limit: z.number().optional(), offset: z.number().optional() },
+  async () => stub(),
+);
+
+server.tool("inbox_blocklist_list", "List blocked sender addresses and domains for inbound email.", {}, async () => stub());
+
+server.tool(
+  "inbox_blocklist_add",
+  "Block a sender email address or entire domain from all account inboxes.",
+  { kind: z.enum(["address", "domain"]), value: z.string() },
+  async () => stub(),
+);
+
+server.tool(
+  "inbox_blocklist_delete",
+  "Remove a blocklist entry by id.",
+  { entryId: z.string() },
   async () => stub(),
 );

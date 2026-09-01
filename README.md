@@ -94,6 +94,8 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 | `budget_get` | Remaining quotas, soft thresholds, and a checkout URL |
 | `budget_estimate` | Preflight 402/429 before spending (`textLength` / `byteLength` for `rag_index`) |
 | `billing_machine_pay` | How agents unlock prepaid Pro or buy SKUs via Stripe MPP (`sku` optional) |
+| `billing_portal` | Stripe Customer Portal URL for subscription management and invoices |
+| `billing_purchases_list` | Local payment history; optional `includeStripe` for backfill |
 | `agent_bootstrap` | Zero-human onboarding: bootstrap token from email (no outbound mail) |
 | `keys_create` | Mint a run/sub key from an account `tp_` key |
 | `kvp_put` | Store a string under a namespace/key (response includes `budget`) |
@@ -107,6 +109,22 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 | `inspect_storage` | Namespace inventory (scoped to the key when applicable) |
 | `run_finish` | Wipe namespaces bound to this **run** key; returns a signed wipe receipt |
 | `support_contact` | Contact Tillpad support from a **Pro** account; replies go to the account email |
+| `inbox_create` | Create a receive-only email inbox (temporary or permanent) |
+| `inbox_list` | List active receive-only inboxes |
+| `inbox_get` | Get one inbox by id |
+| `inbox_delete` | Delete an inbox and purge stored messages |
+| `inbox_messages_list` | List message metadata for an inbox |
+| `inbox_message_get` | Get message metadata and attachment list |
+| `inbox_message_raw` | Download raw MIME (meters 1 kvp_op) |
+| `inbox_attachment_get` | Download an attachment as base64 (meters 1 kvp_op) |
+| `inbox_webhook_create` | Register HTTPS webhook for `email.received` (metadata only) |
+| `inbox_webhook_list` | List registered email webhooks |
+| `inbox_webhook_delete` | Disable an email webhook |
+| `inbox_webhook_deliveries_list` | Webhook delivery log; use `status=failed` for failures |
+| `inbox_audit_list` | Inbox audit log for the account |
+| `inbox_blocklist_list` | List blocked sender addresses and domains |
+| `inbox_blocklist_add` | Block a sender address or entire domain |
+| `inbox_blocklist_delete` | Remove a blocklist entry |
 
 ## Typical agent loop
 
@@ -152,7 +170,7 @@ Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](htt
 
 ### Glama
 
-This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the 17 tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
+This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the **35** tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
 
 Listing: [glama.ai/mcp/servers/number1101/tillpad-mcp](https://glama.ai/mcp/servers/number1101/tillpad-mcp)
 
