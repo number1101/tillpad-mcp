@@ -4,7 +4,7 @@ Guidance for AI agents and coding assistants working with Tillpad.
 
 ## What Tillpad is
 
-Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, file upload + RAG search, budget-aware metering, run keys that wipe with a signed receipt, REST + MCP.
+Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, file upload + RAG search, receive-only email inboxes, budget-aware metering, run keys that wipe with a signed receipt, REST + MCP.
 
 **Live product:** https://tillpad.cnrcode.com
 

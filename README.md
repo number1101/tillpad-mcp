@@ -7,7 +7,7 @@
 [![Auth](https://img.shields.io/badge/auth-Bearer%20tp__-111?style=flat-square)](https://tillpad.cnrcode.com)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 
-Tillpad gives agents namespaced key-value storage, file upload + semantic search, budget-aware metering, and run keys that wipe with a signed receipt when the job is done.
+Tillpad gives agents namespaced key-value storage, file upload + semantic search, receive-only email inboxes, budget-aware metering, and run keys that wipe with a signed receipt when the job is done.
 
 **Live endpoint:** [`https://tillpad.cnrcode.com/mcp`](https://tillpad.cnrcode.com/mcp)
 
