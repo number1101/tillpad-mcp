@@ -43,6 +43,8 @@ Transport is **Streamable HTTP**. Send `Authorization: Bearer tp_…` on every r
 
 This repo includes a [Cursor plugin manifest](.cursor-plugin/plugin.json) and root [`mcp.json`](mcp.json) for one-click install from the [Cursor Marketplace](https://cursor.com/marketplace/publish).
 
+Tillpad MCP tools cover namespaced KVP, RAG search, **receive-only email inboxes** (temporary/permanent addresses, webhooks, blocklist, raw MIME read), budget metering, and run-key wipe receipts.
+
 1. Install the **Tillpad** plugin from the marketplace (or test locally — see below).
 2. Open **Cursor Settings → Customize → Tillpad** and set **Tillpad API key** (`tp_…` from bootstrap + machine-pay or the dashboard).
 3. Reload the window. MCP tools should appear under the Tillpad server.

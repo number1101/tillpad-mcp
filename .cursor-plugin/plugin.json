@@ -1,13 +1,13 @@
 {
   "name": "tillpad",
   "version": "0.1.2",
-  "description": "Bounded KVP, RAG search, and wipe receipts for agent jobs",
+  "description": "Bounded KVP, RAG search, receive-only email inboxes, and wipe receipts for agent jobs",
   "author": { "name": "CNR Code", "url": "https://tillpad.cnrcode.com" },
   "homepage": "https://tillpad.cnrcode.com",
   "repository": "https://github.com/number1101/tillpad-mcp",
   "license": "MIT",
   "logo": "assets/logo.svg",
-  "keywords": ["tillpad", "mcp", "kvp", "rag", "agents", "storage"],
+  "keywords": ["tillpad", "mcp", "kvp", "rag", "agents", "storage", "email", "inbox", "inbound-email", "receive-only", "webhooks"],
   "variables": {
     "type": "object",
     "properties": {
