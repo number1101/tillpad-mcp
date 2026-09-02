@@ -1,0 +1,22 @@
+{
+  "name": "tillpad",
+  "version": "0.1.2",
+  "description": "Bounded KVP, RAG search, and wipe receipts for agent jobs",
+  "author": { "name": "CNR Code", "url": "https://tillpad.cnrcode.com" },
+  "homepage": "https://tillpad.cnrcode.com",
+  "repository": "https://github.com/number1101/tillpad-mcp",
+  "license": "MIT",
+  "logo": "assets/logo.svg",
+  "keywords": ["tillpad", "mcp", "kvp", "rag", "agents", "storage"],
+  "variables": {
+    "type": "object",
+    "properties": {
+      "TILLPAD_API_KEY": {
+        "type": "string",
+        "title": "Tillpad API key",
+        "description": "Account or run key starting with tp_ (mint via bootstrap + machine-pay or dashboard)"
+      }
+    },
+    "required": ["TILLPAD_API_KEY"]
+  }
+}

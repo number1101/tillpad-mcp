@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Tillpad">
+  <rect width="32" height="32" rx="8" fill="#0d6e6e"/>
+  <path
+    fill="#f4f6f8"
+    d="M7.5 7.5h17v5.25h-5.75V24.5h-5.5V12.75H7.5V7.5z"
+  />
+</svg>

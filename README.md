@@ -39,6 +39,30 @@ Transport is **Streamable HTTP**. Send `Authorization: Bearer tp_…` on every r
 
 ### Cursor
 
+#### Install via Cursor Marketplace (plugin)
+
+This repo includes a [Cursor plugin manifest](.cursor-plugin/plugin.json) and root [`mcp.json`](mcp.json) for one-click install from the [Cursor Marketplace](https://cursor.com/marketplace/publish).
+
+1. Install the **Tillpad** plugin from the marketplace (or test locally — see below).
+2. Open **Cursor Settings → Customize → Tillpad** and set **Tillpad API key** (`tp_…` from bootstrap + machine-pay or the dashboard).
+3. Reload the window. MCP tools should appear under the Tillpad server.
+
+The plugin points at `https://tillpad.cnrcode.com/mcp` with `Authorization: Bearer ${TILLPAD_API_KEY}`. Never commit a real key.
+
+**Local plugin test** (before marketplace submission):
+
+```powershell
+# Copy catalog repo into Cursor local plugins folder
+$dest = "$env:USERPROFILE\.cursor\plugins\local\tillpad"
+New-Item -ItemType Directory -Force -Path $dest | Out-Null
+Copy-Item -Recurse -Force "C:\dev\tillpad\tillpad-mcp\*" $dest
+# Then: Cursor Customize → Tillpad → set TILLPAD_API_KEY → Developer: Reload Window
+```
+
+Submit the public repo at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) when ready.
+
+#### Manual MCP config
+
 User or project MCP config:
 
 ```json

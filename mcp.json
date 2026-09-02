@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "tillpad": {
+      "url": "https://tillpad.cnrcode.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${TILLPAD_API_KEY}"
+      }
+    }
+  }
+}
