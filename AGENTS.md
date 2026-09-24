@@ -78,7 +78,7 @@ Active Pro required to create keys and run metered work.
 
 ## Tool schemas
 
-Input schemas for all **44** MCP tools are in:
+Input schemas for all **45** MCP tools are in:
 
 - https://tillpad.cnrcode.com/.well-known/mcp.json (under `mcpServers.tillpad.tools`)
 - [`src/server.ts`](src/server.ts) in this repo (Zod stubs matching production)

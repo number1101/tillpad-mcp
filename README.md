@@ -116,7 +116,8 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 
 | Tool | What it does |
 |------|----------------|
-| `usage_get` | Current period usage and quotas |
+| `usage_get` | Usage and quotas (`periodYm` optional for a past calendar month) |
+| `usage_periods_list` | List stored usage periods with meter totals |
 | `budget_get` | Remaining quotas, soft thresholds, and a checkout URL |
 | `budget_estimate` | Preflight 402/429 before spending (`textLength` / `byteLength` for `rag_index`) |
 | `billing_machine_pay` | How agents unlock prepaid Pro or buy SKUs via Stripe MPP (`sku` optional) |

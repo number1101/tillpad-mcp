@@ -29,8 +29,28 @@ export const server = new McpServer({
 
 server.tool(
   "usage_get",
-  "Get current period usage and quotas for the authenticated account",
-  {},
+  "Get usage and quotas for the authenticated account. Omit periodYm for the current calendar month; pass YYYY-MM for a past period.",
+  {
+    periodYm: z
+      .string()
+      .regex(/^\d{4}-(0[1-9]|1[0-2])$/)
+      .optional()
+      .describe("Billing period as YYYY-MM (UTC calendar month)"),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "usage_periods_list",
+  "List stored usage periods (newest first) with meter totals. Optional cursor is an exclusive YYYY-MM for pagination.",
+  {
+    limit: z.number().optional(),
+    cursor: z
+      .string()
+      .regex(/^\d{4}-(0[1-9]|1[0-2])$/)
+      .optional()
+      .describe("Return periods older than this YYYY-MM"),
+  },
   async () => stub(),
 );
 
