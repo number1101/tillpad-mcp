@@ -4,7 +4,7 @@ Guidance for AI agents and coding assistants working with Tillpad.
 
 ## What Tillpad is
 
-Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, file upload + RAG search, receive-only email inboxes, budget-aware metering, run keys that wipe with a signed receipt, REST + MCP.
+Tillpad is metered bounded storage and search for agent jobs: namespaced KVP, memory conventions (`prefs` / `facts` / `run`), file upload + RAG search, receive-only email inboxes, scheduled HTTPS jobs, budget-aware metering, run keys that wipe with a signed receipt, REST + MCP.
 
 **Live product:** https://tillpad.cnrcode.com
 
@@ -78,7 +78,7 @@ Active Pro required to create keys and run metered work.
 
 ## Tool schemas
 
-Input schemas for all **35** MCP tools are in:
+Input schemas for all **44** MCP tools are in:
 
 - https://tillpad.cnrcode.com/.well-known/mcp.json (under `mcpServers.tillpad.tools`)
 - [`src/server.ts`](src/server.ts) in this repo (Zod stubs matching production)

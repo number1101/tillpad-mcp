@@ -45,7 +45,7 @@ server.tool(
   "budget_estimate",
   "Estimate whether an operation would hit 402/429 before spending. For rag_index you can pass textLength/byteLength instead of amount.",
   {
-    kind: z.enum(["kvp_ops", "storage_bytes", "rag_index", "rag_query", "inbound_email"]),
+    kind: z.enum(["kvp_ops", "storage_bytes", "rag_index", "rag_query", "inbound_email", "outbound_http"]),
     amount: z.number().optional(),
     textLength: z.number().optional(),
     byteLength: z.number().optional(),
@@ -150,6 +150,39 @@ server.tool(
 );
 
 server.tool(
+  "memory_put",
+  "Store a value in a memory convention scope (prefs, facts, or run). Uses KVP under a fixed namespace; run scope maps to the run key's bound namespace.",
+  {
+    scope: z.enum(["prefs", "facts", "run"]),
+    key: z.string(),
+    value: z.string(),
+    expirationTtl: z.number().optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "memory_get",
+  "Read a value from a memory convention scope (prefs, facts, or run).",
+  {
+    scope: z.enum(["prefs", "facts", "run"]),
+    key: z.string(),
+  },
+  async () => stub(),
+);
+
+server.tool(
+  "memory_search",
+  "Semantic search over indexed notes/docs. Optional scope filters to prefs, facts, or the run namespace.",
+  {
+    query: z.string(),
+    scope: z.enum(["prefs", "facts", "run"]).optional(),
+    topK: z.number().optional(),
+  },
+  async () => stub(),
+);
+
+server.tool(
   "file_upload",
   "Upload a UTF-8 text document for RAG indexing into a namespace. PrefLights rag_index capacity.",
   {
@@ -172,6 +205,17 @@ server.tool(
   "files_types",
   "List supported RAG upload file types (extensions, MIME types, extract notes)",
   {},
+  async () => stub(),
+);
+
+server.tool(
+  "rag_note",
+  "Index a short plain-text note for RAG without multipart upload. Same pipeline as file_upload.",
+  {
+    namespace: z.string(),
+    text: z.string(),
+    title: z.string().optional(),
+  },
   async () => stub(),
 );
 
@@ -307,5 +351,54 @@ server.tool(
   "inbox_blocklist_delete",
   "Remove a blocklist entry by id.",
   { entryId: z.string() },
+  async () => stub(),
+);
+
+server.tool(
+  "schedule_create",
+  "Create an account schedule that periodically HTTPS GET/POST a URL. Contract: 10s timeout/attempt, up to 3 attempts with exponential backoff (cap 300s), success=2xx; meters outbound_http per attempt (and per notify_webhook action); auto-disables after consecutive exhausted failures (default 5). Auth: none|bearer|header. Optional onSuccess/onFailure actions: store_kvp, store_rag, notify_webhook. Min interval 5 minutes.",
+  {
+    name: z.string().optional(),
+    url: z.string(),
+    method: z.enum(["GET", "POST"]).optional(),
+    bodyTemplate: z.string().optional(),
+    authMode: z.enum(["none", "bearer", "header"]).optional(),
+    authHeaderName: z.string().optional(),
+    authSecret: z.string().optional(),
+    intervalMinutes: z.number(),
+    timezone: z.string().optional(),
+    onSuccess: z.array(z.record(z.unknown())).optional(),
+    onFailure: z.array(z.record(z.unknown())).optional(),
+  },
+  async () => stub(),
+);
+
+server.tool("schedule_list", "List schedules for the account.", {}, async () => stub());
+
+server.tool(
+  "schedule_get",
+  "Get one schedule by id.",
+  { scheduleId: z.string() },
+  async () => stub(),
+);
+
+server.tool(
+  "schedule_delete",
+  "Disable/delete a schedule.",
+  { scheduleId: z.string() },
+  async () => stub(),
+);
+
+server.tool(
+  "schedule_runs_list",
+  "List schedule run attempts. Use status=failed for exhausted failures; check consecutiveFailures / disabledReason on the schedule.",
+  {
+    scheduleId: z.string().optional(),
+    status: z
+      .enum(["pending", "running", "retrying", "failed", "delivered", "skipped"])
+      .optional(),
+    limit: z.number().optional(),
+    offset: z.number().optional(),
+  },
   async () => stub(),
 );

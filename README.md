@@ -43,7 +43,7 @@ Transport is **Streamable HTTP**. Send `Authorization: Bearer tp_…` on every r
 
 This repo includes a [Cursor plugin manifest](.cursor-plugin/plugin.json) and root [`mcp.json`](mcp.json) for one-click install from the [Cursor Marketplace](https://cursor.com/marketplace/publish).
 
-Tillpad MCP tools cover namespaced KVP, RAG search, **receive-only email inboxes** (temporary/permanent addresses, webhooks, blocklist, raw MIME read), budget metering, and run-key wipe receipts.
+Tillpad MCP tools cover namespaced KVP, RAG search, **receive-only email inboxes**, **scheduled HTTPS jobs**, budget metering, and run-key wipe receipts.
 
 1. Install the **Tillpad** plugin from the marketplace (or test locally — see below).
 2. Open **Cursor Settings → Customize → Tillpad** and set **Tillpad API key** (`tp_…` from bootstrap + machine-pay or the dashboard).
@@ -128,9 +128,13 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 | `kvp_get` | Read a namespaced value |
 | `kvp_delete` | Delete a KVP key |
 | `kvp_list` | List keys in a namespace |
+| `memory_put` | Store under memory scope `prefs` / `facts` / `run` (KVP) |
+| `memory_get` | Read from a memory scope |
+| `memory_search` | Semantic search; optional `scope` filters to a memory namespace |
 | `file_upload` | Upload UTF-8 text for RAG indexing (prefLights `rag_index`) |
 | `files_list` | List uploaded files |
 | `files_types` | Supported upload extensions and MIME types |
+| `rag_note` | Index plain text without multipart (same pipeline as `file_upload`) |
 | `rag_search` | Semantic search over indexed documents |
 | `inspect_storage` | Namespace inventory (scoped to the key when applicable) |
 | `run_finish` | Wipe namespaces bound to this **run** key; returns a signed wipe receipt |
@@ -151,12 +155,15 @@ Schemas in [`src/server.ts`](src/server.ts) match the hosted server.
 | `inbox_blocklist_list` | List blocked sender addresses and domains |
 | `inbox_blocklist_add` | Block a sender address or entire domain |
 | `inbox_blocklist_delete` | Remove a blocklist entry |
+| `schedule_create` | Create HTTPS interval schedule (`outbound_http` per attempt + `notify_webhook`; auto-disable after consecutive failures) |
+| `schedule_list` / `schedule_get` / `schedule_delete` | Manage schedules |
+| `schedule_runs_list` | Schedule run/attempt log |
 
 ## Typical agent loop
 
 1. Mint a **run** key in the dashboard (dedicated namespace, TTL, optional op budget).
-2. Store working state with `kvp_put` and/or `file_upload`.
-3. Retrieve with `kvp_get` / `kvp_list` and `rag_search`.
+2. Store working state with `memory_put` / `kvp_put` and/or `rag_note` / `file_upload`.
+3. Retrieve with `memory_get` / `kvp_get` / `kvp_list` and `memory_search` / `rag_search`.
 4. Call `run_finish` to wipe run namespaces and keep the signed receipt.
 
 Use `budget_estimate` before large index jobs. `budget_get` / `usage_get` show what is left in the period.
@@ -196,7 +203,7 @@ Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](htt
 
 ### Glama
 
-This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the **35** tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
+This repo includes a **stdio catalog stub** (`src/main.ts`) so [Glama](https://glama.ai/mcp/servers) can build a container, start the process, and introspect the **44** tool definitions. It does not implement storage or billing — clients still connect to the hosted endpoint above.
 
 Listing: [glama.ai/mcp/servers/number1101/tillpad-mcp](https://glama.ai/mcp/servers/number1101/tillpad-mcp)
 
