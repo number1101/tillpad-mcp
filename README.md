@@ -6,6 +6,7 @@
 [![Transport](https://img.shields.io/badge/transport-streamable--http-0ea5e9?style=flat-square)](https://modelcontextprotocol.io)
 [![Auth](https://img.shields.io/badge/auth-Bearer%20tp__-111?style=flat-square)](https://tillpad.cnrcode.com)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
+[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/number1101/tillpad-mcp)
 
 Tillpad gives agents namespaced key-value storage, file upload + semantic search, receive-only email inboxes, budget-aware metering, and run keys that wipe with a signed receipt when the job is done.
 
