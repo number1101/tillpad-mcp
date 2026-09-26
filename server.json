@@ -6,7 +6,7 @@
   "version": "0.1.2",
   "websiteUrl": "https://tillpad.cnrcode.com",
   "repository": {
-    "url": "https://github.com/number1101/tillpad-mcp",
+    "url": "https://github.com/CNR-Consulting/tillpad-mcp",
     "source": "github"
   },
   "remotes": [
