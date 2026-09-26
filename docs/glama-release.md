@@ -6,10 +6,10 @@ Steps to satisfy [awesome-mcp-servers PR #13043](https://github.com/punkpeye/awe
 
 ## 1. Submit and claim
 
-1. Open [glama.ai/mcp/servers](https://glama.ai/mcp/servers) and submit `github.com/number1101/tillpad-mcp` if not indexed.
+1. Open [glama.ai/mcp/servers](https://glama.ai/mcp/servers) and submit `github.com/CNR-Consulting/tillpad-mcp` if not indexed.
 2. Open [glama.ai/mcp/servers/number1101/tillpad-mcp/score](https://glama.ai/mcp/servers/number1101/tillpad-mcp/score).
 3. Click **Sync Server** (Glama mirror can lag behind GitHub).
-4. Click **Claim ownership** — `glama.json` must list your GitHub username (`number1101`).
+4. Click **Claim ownership** — `glama.json` must list your GitHub username (`number1101` or `riderc`).
 
 ## 2. Configure build
 
@@ -45,7 +45,7 @@ After the listing passes and the badge URL resolves, edit the Tillpad line on br
 **After:**
 
 ```markdown
-- [number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) [![number1101/tillpad-mcp MCP server](https://glama.ai/mcp/servers/number1101/tillpad-mcp/badges/score.svg)](https://glama.ai/mcp/servers/number1101/tillpad-mcp) 📇 ☁️ - Tillpad: bounded storage and search for agent jobs. Remote MCP at https://tillpad.cnrcode.com/mcp (streamable HTTP, Bearer auth). Docs: https://tillpad.cnrcode.com/docs
+- [CNR-Consulting/tillpad-mcp](https://github.com/CNR-Consulting/tillpad-mcp) [![number1101/tillpad-mcp MCP server](https://glama.ai/mcp/servers/number1101/tillpad-mcp/badges/score.svg)](https://glama.ai/mcp/servers/number1101/tillpad-mcp) 📇 ☁️ - Tillpad: bounded storage and search for agent jobs. Remote MCP at https://tillpad.cnrcode.com/mcp (streamable HTTP, Bearer auth). Docs: https://tillpad.cnrcode.com/docs
 ```
 
 Reply on PR #13043 that Glama checks are complete.

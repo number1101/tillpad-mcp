@@ -201,7 +201,7 @@ Registry name: **`com.cnrcode/tillpad`** (domain namespace via [cnrcode.com](htt
    git push origin v0.1.1
    ```
 
-4. Optionally submit [https://github.com/number1101/tillpad-mcp](https://github.com/number1101/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
+4. Optionally submit [https://github.com/CNR-Consulting/tillpad-mcp](https://github.com/CNR-Consulting/tillpad-mcp) at [mcp.directory/submit](https://mcp.directory/submit).
 
 ### Glama
 
